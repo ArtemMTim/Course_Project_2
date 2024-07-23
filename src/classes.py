@@ -1,11 +1,13 @@
 import json
 import os
+from functools import total_ordering
 
 import requests
 
 from config import DATA_DIR
 
 
+@total_ordering
 class Vacansy:
     """Класс, описывающий вакансию и её основные характеристики"""
 
@@ -21,6 +23,27 @@ class Vacansy:
         self.salary = salary
         self.description = description
         self.requirement = requirement
+
+    def __str__(self):
+        return f"Вакансия - {self.title}, зарплата - {self.salary}, ссылка на вакансию - {self.link}."
+
+    def __eq__(self, other):
+        if isinstance(other, Vacansy):
+            return self.salary == other.salary
+        else:
+            return NotImplemented
+
+    def __lt__(self, other):
+        if isinstance(other, Vacansy):
+            return self.salary < other.salary
+        else:
+            return NotImplemented
+
+    def __ge__(self, other):
+        if isinstance(other, Vacansy):
+            return self.salary >= other.salary
+        else:
+            return NotImplemented
 
 
 class WorkWithFile:
