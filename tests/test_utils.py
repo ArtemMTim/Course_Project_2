@@ -1,6 +1,6 @@
 import pytest
 
-from src.classes import Vacansy
+from src.vacansy import Vacansy
 from src.utils import info_vacansy_from_object
 
 

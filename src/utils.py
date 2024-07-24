@@ -2,7 +2,7 @@ import json
 import os
 
 from config import DATA_DIR
-from src.classes import Vacansy
+from src.vacansy import Vacansy
 
 
 def info_vacansy_from_object(vac_object: Vacansy) -> str:
