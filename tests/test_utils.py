@@ -1,7 +1,7 @@
 import pytest
 
-from src.vacansy import Vacansy
 from src.utils import info_vacansy_from_object
+from src.vacansy import Vacansy
 
 
 def test_info_vacansy(vacansy_1):

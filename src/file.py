@@ -26,15 +26,19 @@ class WorkWithFile:
 
     def show_vacansy_list(self):
         """Метод выводит расширенную информацию о вакансиях из списка объектов вакансий с номерами."""
+        if len(self.vacs_list) == 0:
+            return []
         num = 0
         result_info = ""
         for item in self.vacs_list:
             num += 1
             result_info += f"Номер - {num} Вакансия: {item.title}, зарплата: {item.salary}, ссылка: {item.link}, описание: {item.description}, требования: {item.requirement}\n"
-            return result_info
+        return result_info
 
     def show_str_vacs(self):
         """Метод выводит сокращённую информацию о вакансиях из списка объектов вакансий с номерами."""
+        if len(self.vacs_list) == 0:
+            return []
         num = 0
         result_info = ""
         for item in self.vacs_list:
@@ -95,13 +99,13 @@ if __name__ == "__main__":
     file = WorkWithFile("vacs.json")
     print(file.filename)
     # Чтение файла
-    file.read_file()
+    # file.read_file()
     # Вывод считанного списка
     print(file.show_vacansy_list())
     # Удаление вакансии по индексу
-    file.del_vacansy(0)
+    # file.del_vacansy(0)
     # Вывод изменённого списка
-    print(file.show_vacansy_list())
+    # print(file.show_vacansy_list())
 
     vac1 = {
         "title": "Инженер 1 кат",
