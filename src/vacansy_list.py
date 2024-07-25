@@ -5,7 +5,7 @@ from config import DATA_DIR
 from src.vacansy import Vacansy
 
 
-class WorkWithFile:
+class VacansyList:
     """Класс, принимает название json файла с вакансиями (название также задано по-умолчанию). Читает указанный файл в папке data проекта,
     выводит список вакансий как в str виде так и в расширенном виде.
     Позволяет создавать и редактировать список вакансий - добавлять вакансии, удалять их по индексу.
@@ -52,23 +52,21 @@ class WorkWithFile:
         return f"Вакансия: {item.title}, зарплата: {item.salary}, ссылка: {item.link}, описание: {item.description}, требования: {item.requirement}"
 
     def add_vacansy(self, vacansy: dict) -> None:
-        """Метод добавляет объект вакансии в список вакансий, принимая данные в виде словаря с описанием вакансии."""
-        new_vacansy = Vacansy(**vacansy)
-        self.vacs_list.append(new_vacansy)
-
-    def add_vacansy_object(self, vacansy: Vacansy) -> None:
-        """Метод добавляет объект вакансии в список вакансий, принимая данные в объекта класса Vacansy."""
-        self.vacs_list.append(vacansy)
-
-    def add_vacansy_list(self, vac_list: list[Vacansy]) -> None:
-        """Метод добавляет объекты вакансии в список вакансий, принимая данные в виде списка объектов класса Vacansy."""
-        self.vacs_list.extend(vac_list)
-
-    def add_vacansy_dicts(self, vac_dicts: list[dict]) -> None:
-        """Метод добавляет объекты вакансии в список вакансий, принимая данные в виде списка словарей с описанием вакансий."""
-        for vacansy in vac_dicts:
+        """Метод добавляет объект вакансии в список вакансий,
+        принимая данные в виде словаря с описанием вакансии, объекта вакнсии, списка словарей,
+        либо списка объектов вакансий."""
+        if isinstance(vacansy, dict):
             new_vacansy = Vacansy(**vacansy)
             self.vacs_list.append(new_vacansy)
+        elif isinstance(vacansy, Vacansy):
+            self.vacs_list.append(vacansy)
+        elif isinstance(vacansy, list) or isinstance(vacansy, tuple):
+            for item in vacansy:
+                if isinstance(item, dict):
+                    new_vacansy = Vacansy(**item)
+                    self.vacs_list.append(new_vacansy)
+                elif isinstance(item, Vacansy):
+                    self.vacs_list.append(item)
 
     def del_vacansy(self, number: int) -> None:
         """Метод удаляет из списка объект вакансии по номеру (индексу)."""
@@ -94,9 +92,17 @@ class WorkWithFile:
         except:
             raise ValueError("При записи фаайла произошла ошибка!")
 
+    def export_vacansy_list(self):
+        """Метод возвращает список объектов вакансий."""
+        return self.vacs_list
+
+    def import_vacansy_list(self, new_list):
+        """Метод принимает новый список объектов вакансий и заменяет им старый."""
+        self.vacs_list = new_list
+
 
 if __name__ == "__main__":
-    file = WorkWithFile("vacs.json")
+    file = VacansyList("vacs.json")
     print(file.filename)
     # Чтение файла
     # file.read_file()
@@ -125,13 +131,13 @@ if __name__ == "__main__":
     file.add_vacansy(vac1)
     print(file.show_vacansy_list())
     # Добавление вакансии в виде объекта Vacansy
-    file.add_vacansy_object(Vacansy(**vac2))
+    file.add_vacansy(Vacansy(**vac2))
     print(file.show_vacansy_list())
     # Добавление вакансий в виде списка словарей
-    file.add_vacansy_dicts([vac1, vac2])
+    file.add_vacansy([vac1, vac2])
     print(file.show_vacansy_list())
     # Добавление вакансий в виде списка объектов Vacansy
-    file.add_vacansy_list([Vacansy(**vac1), Vacansy(**vac2)])
+    file.add_vacansy([Vacansy(**vac1), Vacansy(**vac2)])
     print(file.show_vacansy_list())
     # Запись отредактированного списка в файл
     file.write_new_vac_list()
