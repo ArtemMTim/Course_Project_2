@@ -38,12 +38,18 @@ class VacansyFilter:
         pattern = rf"{word}"
         self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.requirement, re.IGNORECASE)]
 
+    def filter_area(self, word):
+        """Метод проводит фильтрование списка объектов вакансий по местоположению (совпадению заданного слова)."""
+        pattern = rf"{word}"
+        self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.area, re.IGNORECASE)]
+
 
 if __name__ == "__main__":
     new_vacs = [
         Vacansy(
             title="Инженер 1кат",
             link="artemtim.ru",
+            area="Москва",
             salary=90000,
             description="Работа с технической документацией",
             requirement="Опрыт работы от 5 лет. Высшее образование.",
@@ -52,6 +58,7 @@ if __name__ == "__main__":
             title="Инженер",
             link="artemtim.ru",
             salary=50000,
+            area="Москва",
             description="Работа на заводе",
             requirement="Опрыт работы от 2 лет. Высшее образование.",
         ),
@@ -62,5 +69,6 @@ if __name__ == "__main__":
     # test.filter_salary(70000)
     # test.filter_title('1кат')
     # test.filter_descriprtion('завод')
-    test.filter_requirement("5 Лет")
+    # test.filter_requirement("5 Лет")
+    test.filter_area("москва")
     print(test.vacs)

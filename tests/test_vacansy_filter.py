@@ -40,3 +40,11 @@ def test_vacansy_filter_salary(vacansy_list_for_filter):
     test.vacs = vacansy_list_for_filter
     test.filter_salary(50000)
     assert test.vacs == vacansy_list_for_filter
+
+
+def test_vacansy_filter_area(vacansy_list_for_filter):
+    """Тестирование фильтрации вакансий по местоположению."""
+    test = VacansyFilter()
+    test.vacs = vacansy_list_for_filter
+    test.filter_area("химки")
+    assert test.vacs == [vacansy_list_for_filter[1]]

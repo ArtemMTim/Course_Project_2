@@ -8,18 +8,20 @@ class Vacansy:
     title: str
     link: str
     salary: int | float
+    area: str
     description: str
     requirement: str
 
-    def __init__(self, title, link, description, requirement, salary=0):
+    def __init__(self, title, link, description, requirement, area, salary=0):
         self.title = title
         self.link = link
         self.salary = salary
+        self.area = area
         self.description = description
         self.requirement = requirement
 
     def __str__(self):
-        return f"Вакансия - {self.title}, зарплата - {self.salary}, ссылка на вакансию - {self.link}."
+        return f"Вакансия - {self.title}, зарплата - {self.salary}, местоположение - {self.area}, ссылка на вакансию - {self.link}."
 
     def __eq__(self, other):
         if isinstance(other, Vacansy):
@@ -41,7 +43,7 @@ class Vacansy:
 
 
 if __name__ == "__main__":
-    vac_1 = Vacansy("Продавец", "link.ru", "Продажа томатов.", "Без опыта работы.", 30000)
+    vac_1 = Vacansy("Продавец", "link.ru", "Продажа томатов.", "Без опыта работы.", "Москва", 30000)
     print(vac_1.description)
     print(vac_1.requirement)
     print(vac_1)

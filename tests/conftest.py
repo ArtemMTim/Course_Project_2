@@ -9,6 +9,7 @@ def vacansy_list():
         Vacansy(
             title="Инженер 1кат",
             link="artemtim.ru",
+            area="Москва",
             salary=90000,
             description="Работа с технической документацией",
             requirement="Опрыт работы от 3 лет. Высшее образование.",
@@ -16,6 +17,7 @@ def vacansy_list():
         Vacansy(
             title="Инженер",
             link="artemtim.ru",
+            area="Москва",
             salary=50000,
             description="Работа с технической документацией",
             requirement="Опрыт работы от 3 лет. Высшее образование.",
@@ -30,12 +32,14 @@ def vacansy_list_for_filter():
             title="Инженер 1кат",
             link="artemtim.ru",
             salary=90000,
+            area="Москва",
             description="Работа с технической документацией",
             requirement="Опрыт работы от 3 лет. Высшее образование.",
         ),
         Vacansy(
             title="Продавец",
             link="artemtim.ru",
+            area="Химки",
             salary=50000,
             description="Продажа томатов",
             requirement="Опрыт работы от 2 лет.",
@@ -48,6 +52,7 @@ def vacansy_1():
     return Vacansy(
         title="Инженер",
         link="artemtim.ru",
+        area="Москва",
         salary=50000,
         description="Работа с технической документацией",
         requirement="Опрыт работы от 3 лет. Высшее образование.",
@@ -59,6 +64,7 @@ def vacansy_2():
     return Vacansy(
         title="Инженер 1кат",
         link="artemtim.ru",
+        area="Москва",
         salary=90000,
         description="Работа с технической документацией",
         requirement="Опрыт работы от 3 лет. Высшее образование.",

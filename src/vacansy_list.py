@@ -32,7 +32,7 @@ class VacansyList:
         result_info = ""
         for item in self.vacs_list:
             num += 1
-            result_info += f"Номер - {num} Вакансия: {item.title}, зарплата: {item.salary}, ссылка: {item.link}, описание: {item.description}, требования: {item.requirement}\n"
+            result_info += f"Номер - {num} Вакансия: {item.title}, зарплата: {item.salary}, местоположение: {item.area}, описание: {item.description}, требования: {item.requirement}, ссылка: {item.link}\n"
         return result_info
 
     def show_str_vacs(self):
@@ -49,7 +49,7 @@ class VacansyList:
     def show_vacansy_by_index(self, index):
         """Метод выводит расширенную информацию о вакансии по заданному индексу."""
         item = self.vacs_list[index - 1]
-        return f"Вакансия: {item.title}, зарплата: {item.salary}, ссылка: {item.link}, описание: {item.description}, требования: {item.requirement}"
+        return f"Вакансия: {item.title}, зарплата: {item.salary}, местоположение: {item.area}, описание: {item.description}, требования: {item.requirement}, ссылка: {item.link}"
 
     def add_vacansy(self, vacansy: dict) -> None:
         """Метод добавляет объект вакансии в список вакансий,
@@ -81,16 +81,17 @@ class VacansyList:
                     {
                         "title": item.title,
                         "salary": item.salary,
-                        "link": item.link,
+                        "area": item.area,
                         "description": item.description,
                         "requirement": item.requirement,
+                        "link": item.link,
                     }
                 )
             with open(self.fullname, "w", encoding="utf-8") as file:
                 json.dump(temp_vac_list, file, ensure_ascii=False, indent=4)
             print("Файл записан")
         except:
-            raise ValueError("При записи фаайла произошла ошибка!")
+            raise ValueError("При записи файла произошла ошибка!")
 
     def export_vacansy_list(self):
         """Метод возвращает список объектов вакансий."""
@@ -117,6 +118,7 @@ if __name__ == "__main__":
         "title": "Инженер 1 кат",
         "salary": 150000,
         "link": "artemtim.ru",
+        "area": "Москва",
         "description": "Работа с технической документацией",
         "requirement": "Опрыт работы от 5 лет. Высшее образование.",
     }
@@ -124,6 +126,7 @@ if __name__ == "__main__":
         "title": "Инженер 2 кат",
         "salary": 70000,
         "link": "artemtim.ru",
+        "area": "Москва",
         "description": "Работа с технической документацией",
         "requirement": "Опрыт работы от 2 лет. Высшее образование.",
     }
