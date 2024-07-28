@@ -106,9 +106,9 @@ if __name__ == "__main__":
     file = VacansyList("vacs.json")
     print(file.filename)
     # Чтение файла
-    # file.read_file()
+    file.read_file()
     # Вывод считанного списка
-    print(file.show_vacansy_list())
+    # print(file.show_vacansy_list())
     # Удаление вакансии по индексу
     # file.del_vacansy(0)
     # Вывод изменённого списка
@@ -131,21 +131,21 @@ if __name__ == "__main__":
         "requirement": "Опрыт работы от 2 лет. Высшее образование.",
     }
     # Добавление вакансии в виде словаря
-    file.add_vacansy(vac1)
-    print(file.show_vacansy_list())
+    # file.add_vacansy(vac1)
+    # print(file.show_vacansy_list())
     # Добавление вакансии в виде объекта Vacansy
-    file.add_vacansy(Vacansy(**vac2))
-    print(file.show_vacansy_list())
+    # file.add_vacansy(Vacansy(**vac2))
+    # print(file.show_vacansy_list())
     # Добавление вакансий в виде списка словарей
-    file.add_vacansy([vac1, vac2])
-    print(file.show_vacansy_list())
+    # file.add_vacansy([vac1, vac2])
+    # print(file.show_vacansy_list())
     # Добавление вакансий в виде списка объектов Vacansy
-    file.add_vacansy([Vacansy(**vac1), Vacansy(**vac2)])
-    print(file.show_vacansy_list())
+    # file.add_vacansy([Vacansy(**vac1), Vacansy(**vac2)])
+    # print(file.show_vacansy_list())
     # Запись отредактированного списка в файл
-    file.write_new_vac_list()
+    # file.write_new_vac_list()
     # Чтение файла
-    file.read_file()
+    # file.read_file()
     # Вывод считанного списка
     print(file.show_str_vacs())
     # Вывод информации о вакансии по индексу
