@@ -3,7 +3,8 @@ import re
 
 
 class VacansyFilter:
-    """Класс фильтрует список объектов вакансий по заданным признакам. Возвращает отфильтрованный список."""
+    """Класс фильтрует список объектов вакансий по заданным признакам, сортирует по зарплате (по-умолчанию по возростанию).
+    Возвращает отфильтрованный и отсортированный список."""
 
     def __init__(self):
         self.__vacs = []
@@ -43,6 +44,10 @@ class VacansyFilter:
         pattern = rf"{word}"
         self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.area, re.IGNORECASE)]
 
+    def sort_by_salary(self, direction=False):
+        """Метод сортирует список объектов вакансий по зарплате (по-умолчанию по возрастанию)"""
+        self.__vacs.sort(key=lambda x: x.salary, reverse=direction)
+
 
 if __name__ == "__main__":
     new_vacs = [
@@ -70,5 +75,6 @@ if __name__ == "__main__":
     # test.filter_title('1кат')
     # test.filter_descriprtion('завод')
     # test.filter_requirement("5 Лет")
-    test.filter_area("москва")
+    # test.filter_area("москва")
+    test.sort_by_salary()
     print(test.vacs)

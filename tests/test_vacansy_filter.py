@@ -48,3 +48,19 @@ def test_vacansy_filter_area(vacansy_list_for_filter):
     test.vacs = vacansy_list_for_filter
     test.filter_area("химки")
     assert test.vacs == [vacansy_list_for_filter[1]]
+
+
+def test_vacansy_sort_not_reverce(vacansy_list_for_filter, vacansy_list_sorted):
+    """Тестирование сортировки вакансий по возрастанию зарплаты."""
+    test = VacansyFilter()
+    test.vacs = vacansy_list_for_filter
+    test.sort_by_salary()
+    assert test.vacs == vacansy_list_sorted
+
+
+def test_vacansy_sort_reverce(vacansy_list_sorted, vacansy_list_for_filter):
+    """Тестирование сортировки вакансий по убыванию зарплаты."""
+    test = VacansyFilter()
+    test.vacs = vacansy_list_sorted
+    test.sort_by_salary(True)
+    assert test.vacs == vacansy_list_for_filter

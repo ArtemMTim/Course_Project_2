@@ -24,6 +24,8 @@ class Parser(ABC):
 
 class HH(Parser):
     """Класс для работы с API сервиса HeadHunter.
+    Получает список вакансий по ключевому слову.
+    Полученный список приводит к необходимому виду, описанному в README.
     Класс является дочерним классом класса Parser."""
 
     def __init__(self, filename):
@@ -92,5 +94,5 @@ class HH(Parser):
 
 if __name__ == "__main__":
     hh = HH("test.json")
-    hh.load_vacancies("")
+    hh.load_vacancies("Зоолог")
     hh.write_file()
