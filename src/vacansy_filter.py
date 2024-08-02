@@ -16,33 +16,39 @@ class VacansyFilter:
     @vacs.setter
     def vacs(self, vacs):
         if isinstance(vacs, list):
+            self.__vacs = []
             self.__vacs = vacs
         else:
             raise ValueError("Некорректные данные")
 
     def filter_salary(self, salary):
         """Метод проводит фильтрование списка объектов вакансий по зарплате(более заданного значения)."""
-        self.__vacs = [item for item in self.__vacs if item.salary >= salary]
+        temp = filter(lambda x: x.salary >= salary, self.__vacs)
+        self.__vacs = list(temp)
 
     def filter_title(self, word):
         """Метод проводит фильтрование списка объектов вакансий по названию вакансии (совпадению заданного слова)."""
         pattern = rf"{word}"
-        self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.title, re.IGNORECASE)]
+        temp = filter(lambda x: re.findall(pattern, x.title, re.IGNORECASE), self.__vacs)
+        self.__vacs = list(temp)
 
     def filter_descriprtion(self, word):
         """Метод проводит фильтрование списка объектов вакансий по описанию вакансии (совпадению заданного слова)."""
         pattern = rf"{word}"
-        self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.description, re.IGNORECASE)]
+        temp = filter(lambda x: re.findall(pattern, x.description, re.IGNORECASE), self.__vacs)
+        self.__vacs = list(temp)
 
     def filter_requirement(self, word):
         """Метод проводит фильтрование списка объектов вакансий по требованию к вакансии (совпадению заданного слова)."""
         pattern = rf"{word}"
-        self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.requirement, re.IGNORECASE)]
+        temp = filter(lambda x: re.findall(pattern, x.requirement, re.IGNORECASE), self.__vacs)
+        self.__vacs = list(temp)
 
     def filter_area(self, word):
         """Метод проводит фильтрование списка объектов вакансий по местоположению (совпадению заданного слова)."""
         pattern = rf"{word}"
-        self.__vacs = [item for item in self.__vacs if re.findall(pattern, item.area, re.IGNORECASE)]
+        temp = filter(lambda x: re.findall(pattern, x.area, re.IGNORECASE), self.__vacs)
+        self.__vacs = list(temp)
 
     def sort_by_salary(self, direction=False):
         """Метод сортирует список объектов вакансий по зарплате (по-умолчанию по возрастанию)"""

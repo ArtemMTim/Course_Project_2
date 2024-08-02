@@ -1,8 +1,9 @@
 import requests
 from abc import ABC, abstractmethod
-import json
+
 import os
 from config import DATA_DIR
+from src.vacansy import Vacansy
 
 
 class Parser(ABC):
@@ -17,10 +18,6 @@ class Parser(ABC):
     def export_vac_list(self):
         pass
 
-    @abstractmethod
-    def write_file(self):
-        pass
-
 
 class HH(Parser):
     """Класс для работы с API сервиса HeadHunter.
@@ -28,7 +25,7 @@ class HH(Parser):
     Полученный список приводит к необходимому виду, описанному в README.
     Класс является дочерним классом класса Parser."""
 
-    def __init__(self, filename):
+    def __init__(self, filename="vacs.json"):
         self.url = "https://api.hh.ru/vacancies"
         self.headers = {"User-Agent": "HH-User-Agent"}
         self.params = {"text": "", "page": 0, "per_page": 100}
@@ -45,54 +42,43 @@ class HH(Parser):
             vacancies = response.json()["items"]
             self.vacancies.extend(vacancies)
             self.params["page"] += 1
-            for vacancie in self.vacancies:
-                if vacancie["name"]:
-                    title = vacancie["name"]
-                else:
-                    title = "Не указано."
-                if vacancie["alternate_url"]:
-                    link = vacancie["alternate_url"]
-                else:
-                    link = "Не указано."
-                if vacancie["snippet"]["responsibility"]:
-                    description = vacancie["snippet"]["responsibility"]
-                else:
-                    description = "Не указано."
-                if vacancie["snippet"]["requirement"]:
-                    requirement = vacancie["snippet"]["requirement"]
-                else:
-                    requirement = "Не указано."
-                if vacancie["salary"]:
-                    if vacancie["salary"]["from"]:
-                        salary = vacancie["salary"]["from"]
-                else:
-                    salary = 0
-                if vacancie["area"]["name"]:
-                    area = vacancie["area"]["name"]
-                else:
-                    area = "Не указано."
-                self.vacancies_short.append(
-                    {
-                        "title": title,
-                        "link": link,
-                        "description": description,
-                        "requirement": requirement,
-                        "salary": salary,
-                        "area": area,
-                    }
+        for vacancie in self.vacancies:
+            if vacancie["name"]:
+                title = vacancie["name"]
+            else:
+                title = "Не указано."
+            if vacancie["alternate_url"]:
+                link = vacancie["alternate_url"]
+            else:
+                link = "Не указано."
+            if vacancie["snippet"]["responsibility"]:
+                description = vacancie["snippet"]["responsibility"]
+            else:
+                description = "Не указано."
+            if vacancie["snippet"]["requirement"]:
+                requirement = vacancie["snippet"]["requirement"]
+            else:
+                requirement = "Не указано."
+            if vacancie["salary"]:
+                if vacancie["salary"]["from"]:
+                    salary = vacancie["salary"]["from"]
+            else:
+                salary = 0
+            if vacancie["area"]["name"]:
+                area = vacancie["area"]["name"]
+            else:
+                area = "Не указано."
+            self.vacancies_short.append(
+                Vacansy(
+                    title=title, link=link, description=description, requirement=requirement, salary=salary, area=area
                 )
+            )
 
     def export_vac_list(self):
         """Метод возвращает обработанный список вакансий."""
         return self.vacancies_short
 
-    def write_file(self):
-        """Метод записывает обработанный список вакансий в указанный файл."""
-        with open(self.fullname, "w", encoding="utf-8") as file:
-            json.dump(self.vacancies_short, file, ensure_ascii=False, indent=4)
-
 
 if __name__ == "__main__":
     hh = HH("test.json")
     hh.load_vacancies("Зоолог")
-    hh.write_file()

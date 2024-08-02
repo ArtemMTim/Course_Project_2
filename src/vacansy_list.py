@@ -52,7 +52,7 @@ class VacansyList:
         item = self.vacs_list[index - 1]
         return f"Вакансия: {item.title}, зарплата: {item.salary}, местоположение: {item.area}, описание: {item.description}, требования: {item.requirement}, ссылка: {item.link}"
 
-    def add_vacansy(self, vacansy: dict) -> None:
+    def add_vacansy(self, vacansy: any) -> None:
         """Метод добавляет объект вакансии в список вакансий,
         принимая данные в виде словаря с описанием вакансии, объекта вакнсии, списка словарей,
         либо списка объектов вакансий."""
@@ -102,12 +102,22 @@ class VacansyList:
         """Метод принимает новый список объектов вакансий и заменяет им старый."""
         self.vacs_list = new_list
 
+    def top_vacs(self, n):
+        result_info = ""
+        if n < len(self.vacs_list):
+            for i in range(n):
+                result_info += f"Номер - {i+1} {str(self.vacs_list[i])}\n"
+        else:
+            for i in range(len(self.vacs_list)):
+                result_info += f"Номер - {i+1} {str(self.vacs_list[i])}\n"
+        return result_info
+
 
 if __name__ == "__main__":
-    file = VacansyList("vacs.json")
+    file = VacansyList()
     print(file.filename)
     # Чтение файла
-    file.read_file()
+    # file.read_file()
     # Вывод считанного списка
     # print(file.show_vacansy_list())
     # Удаление вакансии по индексу
@@ -131,6 +141,16 @@ if __name__ == "__main__":
         "description": "Работа с технической документацией",
         "requirement": "Опрыт работы от 2 лет. Высшее образование.",
     }
+    vacs = [
+        Vacansy(
+            title="Инженер",
+            link="artemtim.ru",
+            area="Москва",
+            salary=50000,
+            description="Работа с технической документацией",
+            requirement="Опрыт работы от 3 лет. Высшее образование.",
+        )
+    ]
     # Добавление вакансии в виде словаря
     # file.add_vacansy(vac1)
     # print(file.show_vacansy_list())
@@ -139,7 +159,8 @@ if __name__ == "__main__":
     # print(file.show_vacansy_list())
     # Добавление вакансий в виде списка словарей
     # file.add_vacansy([vac1, vac2])
-    # print(file.show_vacansy_list())
+    file.add_vacansy(vacs)
+    print(file.show_vacansy_list())
     # Добавление вакансий в виде списка объектов Vacansy
     # file.add_vacansy([Vacansy(**vac1), Vacansy(**vac2)])
     # print(file.show_vacansy_list())
@@ -150,4 +171,4 @@ if __name__ == "__main__":
     # Вывод считанного списка
     print(file.show_str_vacs())
     # Вывод информации о вакансии по индексу
-    print(file.show_vacansy_by_index(6))
+    # print(file.show_vacansy_by_index(6))
