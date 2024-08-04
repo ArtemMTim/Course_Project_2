@@ -1,6 +1,7 @@
+import pytest
+
 from src.vacansy import Vacansy
 from src.vacansy_filter import VacansyFilter
-import pytest
 
 
 def test_vacansy_filter_set_get_list(vacansy_list_for_filter):

@@ -3,26 +3,27 @@ import pytest
 from src.vacansy_list import VacansyList
 
 
-def test_vacansy_list_init(file_name):
-    """Тестирование инициализации."""
-    assert VacansyList(file_name).filename == "test_file_name.json"
+def test_vacansy_list_init():
+    """Тестирование инициализации"""
+    test = VacansyList()
+    assert len(test.vacs_list) == 0
 
 
 def test_vacansy_list_adding_vac(vacansy_1):
     """Тестирование добавления объекта вакансий в список."""
-    file = VacansyList()
-    file.add_vacansy(vacansy_1)
+    test = VacansyList()
+    test.add_vacansy(vacansy_1)
     assert (
-        file.show_vacansy_by_index(0)
+        test.show_vacansy_by_index(0)
         == "Вакансия: Инженер, зарплата: 50000, местоположение: Москва, описание: Работа с технической документацией, требования: Опрыт работы от 3 лет. Высшее образование., ссылка: artemtim.ru"
     )
 
 
 def test_vacansy_list_adding_list_obj(vacansy_list):
     """Тестирование добавления списка объектов вакансий в список."""
-    file = VacansyList()
-    file.add_vacansy(vacansy_list)
-    assert file.show_str_vacs() == (
+    test = VacansyList()
+    test.add_vacansy(vacansy_list)
+    assert test.show_str_vacs() == (
         "Номер - 1 Вакансия - Инженер 1кат, зарплата - 90000, местоположение - Москва, ссылка на вакансию - artemtim.ru.\n"
         "Номер - 2 Вакансия - Инженер, зарплата - 50000, местоположение - Москва, ссылка на вакансию - artemtim.ru.\n"
     )

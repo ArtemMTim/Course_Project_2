@@ -1,14 +1,14 @@
-import requests
+import os
 from abc import ABC, abstractmethod
 
-import os
+import requests
+
 from config import DATA_DIR
 from src.vacansy import Vacansy
 
 
 class Parser(ABC):
-    """Абстрактный класс по работе с API сервисами.
-    Загружает, обрабатывает, возвращает и записывает в файл данные."""
+    """Абстрактный класс по работе с API сервисами."""
 
     @abstractmethod
     def load_vacancies(self):
@@ -34,8 +34,8 @@ class HH(Parser):
         self.fullname = os.path.join(DATA_DIR, filename)
 
     def load_vacancies(self, keyword):
-        """Метод загружает вакансии с сервиса HH. Формирует из загруженных данных список вакансий
-        с полями: название, ссылка, зарплата, описание, требования, место."""
+        """Метод загружает вакансии с сервиса HH. Формирует из загруженных данных список объектов
+        вакансий с полями: название, ссылка, зарплата, описание, требования, место."""
         self.params["text"] = keyword
         while self.params.get("page") != 20:
             response = requests.get(self.url, headers=self.headers, params=self.params)
@@ -77,8 +77,3 @@ class HH(Parser):
     def export_vac_list(self):
         """Метод возвращает обработанный список вакансий."""
         return self.vacancies_short
-
-
-if __name__ == "__main__":
-    hh = HH("test.json")
-    hh.load_vacancies("Зоолог")
