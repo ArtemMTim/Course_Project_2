@@ -17,6 +17,14 @@ class ReadWriteFile(ABC):
     def write_file(self):
         pass
 
+    @abstractmethod
+    def export_vacansy_list(self):
+        pass
+
+    @abstractmethod
+    def import_vacansy_list(self):
+        pass
+
 
 class VacansyFile(ReadWriteFile):
     """Класс работает с записью/чтением списка вакансий в файл, принимает/возвращает список вакансий.
