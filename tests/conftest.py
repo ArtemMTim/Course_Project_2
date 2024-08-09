@@ -7,7 +7,7 @@ from src.vacansy import Vacansy
 def vacansy_list():
     return [
         Vacansy(
-            title="Инженер 1кат",
+            title="Инженер",
             link="artemtim.ru",
             area="Москва",
             salary=90000,

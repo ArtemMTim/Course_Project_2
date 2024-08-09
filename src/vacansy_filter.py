@@ -1,7 +1,5 @@
 import re
 
-from src.vacansy import Vacansy
-
 
 class VacansyFilter:
     """Класс фильтрует список объектов вакансий по заданным признакам, сортирует по зарплате
@@ -41,7 +39,8 @@ class VacansyFilter:
         self.__vacs = list(temp)
 
     def filter_requirement(self, word):
-        """Метод проводит фильтрование списка объектов вакансий по требованию к вакансии (совпадению заданного слова)."""
+        """Метод проводит фильтрование списка объектов вакансий
+        по требованию к вакансии (совпадению заданного слова)."""
         pattern = rf"{word}"
         temp = filter(lambda x: re.findall(pattern, x.requirement, re.IGNORECASE), self.__vacs)
         self.__vacs = list(temp)

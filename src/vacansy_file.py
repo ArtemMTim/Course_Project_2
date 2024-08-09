@@ -61,7 +61,7 @@ class VacansyFile(ReadWriteFile):
             with open(self.fullname, "w", encoding="utf-8") as file:
                 json.dump(temp_vac_list, file, ensure_ascii=False, indent=4)
             print("Файл успешно записан.")
-        except:
+        except Exception:
             raise ValueError("При записи файла произошла ошибка!")
 
     def export_vacansy_list(self):

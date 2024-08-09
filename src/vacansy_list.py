@@ -16,7 +16,13 @@ class VacansyList:
         result_info = ""
         for item in self.vacs_list:
             num += 1
-            result_info += f"Номер - {num} Вакансия: {item.title}, зарплата: {item.salary}, местоположение: {item.area}, описание: {item.description}, требования: {item.requirement}, ссылка: {item.link}\n"
+            title = f"Вакансия - {item.title}"
+            salary = f"зарплата - {item.salary}"
+            area = f"местоположение - {item.area}"
+            description = f"описание - {item.description}"
+            requirement = f"требования - {item.requirement}"
+            link = f"ссылка - {item.link}"
+            result_info += f"Номер - {num} {title}, {salary}, {area}, {description}, {requirement}, {link}\n"
         return result_info
 
     def show_str_vacs(self):
@@ -33,7 +39,13 @@ class VacansyList:
     def show_vacansy_by_index(self, index):
         """Метод выводит расширенную информацию о вакансии по заданному индексу."""
         item = self.vacs_list[index - 1]
-        return f"Вакансия: {item.title}, зарплата: {item.salary}, местоположение: {item.area}, описание: {item.description}, требования: {item.requirement}, ссылка: {item.link}"
+        title = f"Вакансия - {item.title}"
+        salary = f"зарплата - {item.salary}"
+        area = f"местоположение - {item.area}"
+        description = f"описание - {item.description}"
+        requirement = f"требования - {item.requirement}"
+        link = f"ссылка - {item.link}"
+        return f"{title}, {salary}, {area}, {description}, {requirement}, {link}"
 
     def add_vacansy(self, vacansy: any) -> None:
         """Метод добавляет объект вакансии в список вакансий,
@@ -68,8 +80,8 @@ class VacansyList:
         result_info = ""
         if n < len(self.vacs_list):
             for i in range(n):
-                result_info += f"Номер - {i+1} {str(self.vacs_list[i])}\n"
+                result_info += f"Номер - {i + 1} {str(self.vacs_list[i])}\n"
         else:
             for i in range(len(self.vacs_list)):
-                result_info += f"Номер - {i+1} {str(self.vacs_list[i])}\n"
+                result_info += f"Номер - {i + 1} {str(self.vacs_list[i])}\n"
         return result_info

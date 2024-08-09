@@ -1,5 +1,3 @@
-import pytest
-
 from src.vacansy_file import VacansyFile
 
 

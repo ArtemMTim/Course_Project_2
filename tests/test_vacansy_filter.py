@@ -1,6 +1,3 @@
-import pytest
-
-from src.vacansy import Vacansy
 from src.vacansy_filter import VacansyFilter
 
 

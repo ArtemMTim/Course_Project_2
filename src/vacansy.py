@@ -21,7 +21,20 @@ class Vacansy:
         self.requirement = requirement
 
     def __str__(self):
-        return f"Вакансия - {self.title}, зарплата - {self.salary}, местоположение - {self.area}, ссылка на вакансию - {self.link}."
+        title = f"Вакансия - {self.title}"
+        salary = f"зарплата - {self.salary}"
+        area = f"местоположение - {self.area}"
+        link = f"ссылка на вакансию - {self.link}"
+        return f"{title}, {salary}, {area}, {link}."
+
+    def vac_full(self):
+        title = f"Вакансия - {self.title}"
+        salary = f"зарплата - {self.salary}"
+        area = f"местоположение - {self.area}"
+        description = f"описание - {self.description}"
+        requirement = f"требования - {self.requirement}"
+        link = f"ссылка - {self.link}"
+        return f"{title}, {salary}, {area}, {description}, {requirement}, {link}"
 
     def __eq__(self, other):
         if isinstance(other, Vacansy):

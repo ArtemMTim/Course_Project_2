@@ -1,8 +1,3 @@
-import pytest
-
-from src.vacansy import Vacansy
-
-
 def test_vacansy_init(vacansy_1):
     """Тестирование инициализации."""
     assert vacansy_1.title == "Инженер"
